@@ -1,78 +1,41 @@
 import React from 'react';
 import './App.css';
 
-import db from "./firebase";
 import './index.css';
 
+
 class App extends React.Component {
-  TeamMembers() {
-    db.collection("TeamMembers").doc("Monya").set({
-      fullname: "Monya assi",
-      email: "monyaa@gmail.com",
-      favColor: "blue?",
-      address: "palestine",
-    })
-    db.collection("TeamMembers").doc("Hadeel").set({
-      fullname: "Monya assi",
-      email: "monyaa@gmail.com",
-      favColor: "blue?",
-      address: "palestine",
-    })
-    db.collection("TeamMembers").doc("Naem").set({
-      fullname: "Monya assi",
-      email: "monyaa@gmail.com",
-      favColor: "blue?",
-      address: "palestine",
-    })
-    db.collection("TeamMembers").doc("Amro").set({
-      fullname: "Monya assi",
-      email: "monyaa@gmail.com",
-      favColor: "blue?",
-      address: "palestine",
-    })
-
+  constructor() {
+    super()
+    this.state = {
+      email: [],
+    }
   }
-  document() {
-    db.collection("TeamMembers")
-      .doc("Monya")
-      .get()
-      .then((doc) => {
-        const data = doc.data()
-        console.log(data)
-      })
+  handleTextChange(event) {
+    //This function is called whenever the text in the text field is modified
+    alert(event.target.value)
+  }
+  handleSubmit(event) {
+    //This function is called whenever the user clicks "submit" - process the text that was entered here
+    alert("Submitted")
   }
 
-  collection() {
-
-    db.collection("TeamMembers")
-      .get()
-      .then((querySnapshot) => {
-        let data = {}
-        querySnapshot.docs.map(function (doc) {
-          data[ doc.id ] = doc.data()
-          console.log(data)
-          console.log("Monya: " + JSON.stringify(data[ "Monya assi" ]))
-        })
-      }
-
-      )
-
-  }
 
 
 
   render() {
     return (
 
-      <div>
-        <button onClick={this.TeamMembers}></button>
-
-
-
-        <button onClick={this.document}></button>
-
-
-        <button onClick={this.collection}></button>
+      <div className="App">
+        {/*Insert code to render a Hangman component here and pass it information to display the right image*/}
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            value={this.state.currentLetter}
+            onChange={this.handleTextChange}
+          />
+          <button> Submit </button>
+        </form>
       </div>
 
 
